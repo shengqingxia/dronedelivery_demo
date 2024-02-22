@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Selector</title>
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-cyborg-gaming.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+</head>
+
+<style>
+    #videoContainer {
+        position: absolute;
+        top: 100px;
+        left: 200px;
+    }
+
+    #videoLabel {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 10px;
+    }
+
+    #videoSelect {
+        position: absolute;
+        top: 0;
+        left: 150px;
+        margin: 10px;
+    }
+
+    #selectedVideo {
+        margin-top: 40px;
+        height: 500px;
+    }
+
+    #animatedIcon {
+        position: absolute;
+        margin-top: 90px;
+        left: 70%; /* Center horizontally */
+        transform: translateX(-50%);
+        animation: moveDown linear forwards;
+    }
+
+    #myoverlay-image {
+        position: absolute;
+        left: 200px; /* Center horizontally */
+        top: 68%; /* Center vertically */
+        display: none;
+        width:500px;
+    }
+
+    .output {
+        position: absolute;
+        left: 45%;
+        display: none;
+        height: 200px;
+    }
+
+    #arrow-image {
+        position: absolute;
+        left: 45%; /* Center horizontally */
+        top: 67%; /* Center vertically */
+        display: none; 
+        width: 60px;
+    }
+
+    .parabox {
+        position: absolute;
+        left: 50%; /* Center horizontally */
+        top: 66%; /* Center vertically */
+        display: none;
+        width: 600px;
+        height: 320px;
+        border: 4px solid #8BE5AD; 
+    }
+
+    /* Variables */
+    :root {
+    --c-primary: #586075;
+    --c-secondary: #8BE5AD;
+    --c-accent: #F5F5F0;
+    }
+
+    /* Reset and Fonts */
+    html, body {
+    font-family: 'Roboto', 'Helvetica', sans-serif;
+    padding: 0;
+    margin: 0;
+    }
+
+    /* Box Sizing */
+    div {
+    box-sizing: border-box;
+    }
+
+    /* Template Wrap */
+    #template-wrap {
+    width: 600px;
+    height: 800px;
+    /* border: 1px solid #767676; */
+    position: absolute;
+    margin-top: 40px;
+    left: 60%; /* Center horizontally */
+    }
+
+    .template-wrap figure {
+    margin: 1em auto;
+    }
+
+    /* EP Flowchart */
+    .ep-flowchart {
+    width: 100%;
+    position: relative;
+    }
+
+    /* EP SVG Wrap */
+    .ep-svg-wrap .ep-svg-block {
+    cursor: pointer;
+    }
+
+    .ep-svg-wrap .ep-svg-block rect, .ep-svg-wrap .ep-svg-block text {
+    transition: all .3s ease;
+    }
+
+    .ep-svg-wrap .ep-svg-block:hover rect,
+    .ep-svg-wrap .ep-svg-block:hover text {
+    transform: translateY(-5px);
+    text-shadow: 0 1px 0 #fff, 0 -1px 0 #000;
+    }
+
+    /* EP Detail Wrap */
+    .ep-detail-wrap {
+    position: absolute;
+    background-color: rgba(0, 0, 0, .5);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: all 0.4s;
+	visibility: hidden;
+	opacity: 0;
+    }
+
+    /* EP Detail */
+    .ep-detail {
+    position: relative;
+    font-size: 1.2em;
+    background-color: var(--c-accent);
+    color: var(--c-primary);
+    transform: translateY(-50%);
+    margin: 50% auto;
+    width: 60%;
+    height: auto;
+    padding: 1em 2em;
+    border-radius: 15px;
+    border: 5px solid var(--c-secondary);
+    box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
+    }
+
+    .TextDisplay {
+        position: absolute;
+        left: 200px;
+        top: 66%;
+        font-size:16px;
+        color:#666;
+    }
+
+
+    /* Pop Details Animation */
+    .pop-details-enter-active, .pop-details-leave-active {
+    transition: all .3s ease-in-out;
+    }
+
+    .pop-details-enter {
+    opacity: 0;
+    }
+
+    .pop-details-leave-to {
+    opacity: 0;
+    }
+
+    .box {
+        background-color: black;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    p {
+        font-size: 17px;
+        align-items: center;
+    }
+
+    .box a {
+        display: inline-block;
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 3px;
+    }
+
+    .mymodal {
+        position: fixed; /* Change to absolute for positioning */
+        top: 30%; /* Center vertically */
+        left: 80%; /* Center horizontally */
+        transform: translate(-50%, -50%); /* Center exactly */
+        font-size: 1.2em;
+        color: var(--c-primary);
+        width: 40%; /* Adjust width as needed */
+        max-width: 400px; /* Set a max-width if desired */
+        padding: 1em 2em;
+        border-radius: 15px;
+        background-color: var(--c-accent);
+        border: 5px solid var(--c-secondary);
+        box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
+        display: none; /* Hide initially */
+    }
+
+    .mymodal:target {
+        display: block; /* Show when targeted */
+    }
+
+    .mycontent {
+        font-size: 1.2em;
+        color: var(--c-primary);
+    }
+
+    .mybox-close {
+        position: absolute;
+        top: 0;
+        right: 15px;
+        color: #1d6c3b7d;
+        text-decoration: none;
+        font-size: 30px;
+    }
+
+    .active {
+            fill: #8BE5AD;
+        }
+
+</style>
+
+<body>
+
+    <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="assets/images/logo.png" alt="">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Search End ***** -->
+
+                    <!-- ***** Search End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a href="mainpage.html" class="active">Home</a></li>
+                        <li><a href="index.html">Top-View</a></li>
+                        <li><a href="frontindex.html">Front-View</a></li>
+                        <li><a href="index.html">Initialization</a></li>
+                        <li><a href="https://www.cs.purdue.edu/homes/chunyi/index.html">MSSN Group <img src="assets/images/mavic_icon.avif" alt=""></a></li>
+                    </ul>   
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+<div id="videoContainer">
+    <label id="videoLabel" for="videoSelect" style="color: #666;">Select Target SFH:</label>
+    <select id="videoSelect" onchange="playSelectedVideo()">
+        <option value="demo_selected_trace/trace2-DemoVideo/frontdoorRaw.mp4">SFH A</option>
+        <option value="demo_selected_trace/trace2-DemoVideo/frontdoorRaw.mp4">SFH B</option>
+        <option value="demo_selected_trace/trace2-DemoVideo/frontdoorRaw.mp4">SFH C</option>
+        <!-- Add more options as needed -->
+    </select>
+
+    <video id="selectedVideo" controls height="450">
+        <!-- The selected video will be displayed here -->
+    </video>
+</div>
+
+<div id="animatedIcon">
+    <img src="drone_icon.jpeg" alt="Animated Icon" style="width: 70px;">
+</div>
+
+<div id="ProcessedResult">
+    <img id="myoverlay-image" alt="Overlay Image"> 
+</div>
+
+<div id="MoreParas"></div>
+    <img id="arrow-image" src="arrow.jpeg" alt="arrow"> 
+</div>
+
+<div id="para-box" class="parabox">
+    <div id="content" class="content">
+        <!-- Contents of the div -->
+        <p>Try different safety distance (default: 1.5 m):</p>
+        <form id="inputForm">
+            <input type="number" step="0.1" id="fname" name="fname" style="height:30px;width:60px;font-size:12px;">
+            <input type="submit" value="Apply" style="font-size:12px;">
+        </form>
+    </div>
+    <div id="output">
+    </div>
+</div>
+
+<div id="selectedTextDisplay" class="TextDisplay"></div>
+
+<div id="template-wrap">
+  
+    <div class="ep-flowchart" id="ep-flowchart">
+      <div class="ep-svg-wrap">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800">
+
+              <g id="Course-Template">
+
+                <g id="arrows" transform="translate(178 88)">
+                    <g id="arrows/arrow-1.1" transform="rotate(90 69.5 70) translate(0, 0)">
+                      <g id="arrow-1.2">
+                        <path id="Line" stroke="#89969F" stroke-linecap="square" d="M.336 2.5h38.46"/>
+                        <polygon id="Triangle" fill="#89969F" points="37 5 37 0 50 2.5"/>
+                      </g>
+                    </g>
+                    <g id="arrows/arrow-1.2" transform="rotate(90 69.5 70) translate(84,0)">
+                        <g id="arrow-1.2">
+                          <path id="Line" stroke="#89969F" stroke-linecap="square" d="M.336 2.5h38.46"/>
+                          <polygon id="Triangle" fill="#89969F" points="37 5 37 0 50 2.5"/>
+                        </g>
+                    </g>
+
+                    <g id="arrows/arrow-1.3" transform="rotate(90 69.5 70) translate(168,0)">
+                        <g id="arrow-1.2">
+                          <path id="Line" stroke="#89969F" stroke-linecap="square" d="M.336 2.5h38.46"/>
+                          <polygon id="Triangle" fill="#89969F" points="37 5 37 0 50 2.5"/>
+                        </g>
+                    </g>
+
+                    <g id="arrows/arrow-1.4" transform="rotate(90 69.5 70) translate(252,0)">
+                        <g id="arrow-1.2">
+                          <path id="Line" stroke="#89969F" stroke-linecap="square" d="M.336 2.5h38.46"/>
+                          <polygon id="Triangle" fill="#89969F" points="37 5 37 0 50 2.5"/>
+                        </g>
+                    </g>
+
+                    <g id="arrows/arrow-1.5" transform="rotate(90 69.5 70) translate(336,0)">
+                        <g id="arrow-1.2">
+                          <path id="Line" stroke="#89969F" stroke-linecap="square" d="M.336 2.5h38.46"/>
+                          <polygon id="Triangle" fill="#89969F" points="37 5 37 0 50 2.5"/>
+                        </g>
+                    </g>
+
+                    <g id="arrows/arrow-1.6" transform="rotate(90 69.5 70) translate(420,0)">
+                        <g id="arrow-1.2">
+                          <path id="Line" stroke="#89969F" stroke-linecap="square" d="M.336 2.5h38.46"/>
+                          <polygon id="Triangle" fill="#89969F" points="37 5 37 0 50 2.5"/>
+                        </g>
+                    </g>
+                </g>
+
+                <g id="ep-content" class="ep-svg-block" transform="translate(229 46)">
+                <rect id="Rectangle" width="170" height="40" fill="#fff" stroke="#000" rx="20"/>
+                <text id="Content" fill="#586075" font-family="Roboto-Regular, Roboto" font-size="18" letter-spacing="1">
+                    <tspan x="57.022" y="25">START</tspan>
+                </text>
+                </g>
+
+                <g id="ep-form" class="ep-svg-block" transform="translate(229 140)">
+                <rect id="InitialRectangle" width="170" height="40" fill="#aeafb3" rx="0"/>
+                <text id="Content" fill="#586075" font-family="Roboto-Regular, Roboto" font-size="18" letter-spacing="1">
+                    <tspan x="10" y="25">INITIALIZATION</tspan>
+                </text>
+                <rect width="170" height="40" fill="transparent" onclick="openPopup('InitialRectangle')" />
+                </g>
+
+                <g id="ep-media" class="ep-svg-block" transform="translate(229 224)">
+                <rect id="TopRectangle" width="170" height="40" fill="#aeafb3" rx="0"/>
+                <text id="Content" fill="#586075" font-family="Roboto-Regular, Roboto" font-size="18" letter-spacing="1">
+                    <tspan x="41.49" y="25">TOP-VIEW</tspan>
+                </text>
+                <rect width="170" height="40" fill="transparent" onclick="openPopup('TopRectangle')" />
+                </g>
+
+                <g id="ep-unity" class="ep-svg-block" transform="translate(229 308)">
+                <rect id="IntRectangle" width="170" height="40" fill="#aeafb3" rx="0"/>
+                <text id="Content" fill="#586075" font-family="Roboto-Regular, Roboto" font-size="18" letter-spacing="1">
+                 <tspan x="18" y="25">INTERSECTION</tspan>
+                </text>
+                <rect width="170" height="40" fill="transparent" onclick="openPopup('IntRectangle')" />
+                </g>
+
+                <g id="ep-elements" class="ep-svg-block" transform="translate(229 392)">
+                <rect id="FrontRectangle" width="170" height="40" fill="#aeafb3" rx="0"/>
+                <text id="Content" fill="#586075" font-family="Roboto-Regular, Roboto" font-size="18" letter-spacing="1">
+                    <tspan x="26.49" y="25">FRONT DOOR</tspan>
+                </text>
+                <rect width="170" height="40" fill="transparent" onclick="openPopup('FrontRectangle')" />
+                </g>
+
+                <g id="ep-movement" class="ep-svg-block" transform="translate(229 476)">
+                <rect id="Rectangle" width="170" height="40" fill="#aeafb3" rx="0"/>
+                <text id="Content" fill="#586075" font-family="Roboto-Regular, Roboto" font-size="18" letter-spacing="1">
+                    <tspan x="31.49" y="25">MOVEMENT</tspan>
+                </text>
+                <rect width="170" height="40" fill="transparent" onclick="openPopup()" />
+                </g>
+
+                <g id="ep-drop" class="ep-svg-block" transform="translate(229 560)">
+                <rect id="Rectangle" width="170" height="40" fill="#fff" stroke="#000" rx="20"/>
+                <text id="Content" fill="#586075" font-family="Roboto-Regular, Roboto" font-size="18" letter-spacing="1">
+                    <tspan x="38.49" y="25">DROP-OFF</tspan>
+                </text>
+                </g>
+
+              </g>
+        </svg>
+
+      </div>
+    </div>
+
+</div>
+
+<div id="popup-box" class="mymodal">
+    <div class="mycontent">
+        <h3 style="color: green;">
+            Goal of this module:
+        </h3>
+        <b>
+            <p id="popup-content">
+                <!-- Content will be dynamically replaced here -->
+            </p>
+
+            <p style="color: #8BE5AD;">Explore more examples: 
+            <button id="openNewPage" onclick="openNewPage()">Click Here!</button>
+            </p>
+        </b>
+        <a href="#" class="mybox-close">
+            ×
+        </a>
+    </div>
+</div>
+
+
+<script>
+     window.onload = function() {
+        // Play the default video when the page loads
+        playSelectedVideo();
+    };
+
+    function playSelectedVideo() {
+        var sel = document.getElementById("videoSelect");
+        var selectedText= sel.options[sel.selectedIndex].text;
+        var overlayImage = document.getElementById("myoverlay-image");
+        var arrowImage = document.getElementById("arrow-image");
+        var border = document.getElementById("para-box");
+
+        
+
+        // Get the selected video URL from the drop-down box
+        var selectedVideoUrl = document.getElementById("videoSelect").value;
+
+        // Set the source of the video element to the selected video URL
+        document.getElementById("selectedVideo").src = selectedVideoUrl;
+
+        // Play the video
+        document.getElementById("selectedVideo").play();
+
+        // Dynamically adjust animation based on the selected video
+        var icon = document.getElementById("animatedIcon");
+        var durations = getAnimationDurations(selectedText);
+
+
+        // Remove the current animation
+        icon.style.animation = "none";
+
+        // Force a reflow to apply the style immediately
+        void icon.offsetWidth;
+
+
+        // Set the dynamic animation keyframes
+        var dynamicKeyframes = `@keyframes moveDown {
+            0% {
+                top: 0;
+            }
+            ${durations[0]}% {
+                top: 84px; /* Adjust the intermediate position based on your needs */
+            }
+            ${durations[1]}% {
+                top: 108px; /* Adjust the intermediate position based on your needs */
+            }
+            24% {
+                top: 262px; /* Adjust the intermediate position based on your needs */
+            }
+            63% {
+                top: 336px; /* Adjust the intermediate position based on your needs */
+            }
+            80% {
+                top: 420px; /* Adjust the intermediate position based on your needs */
+            }
+            100% {
+                top: 510px; /* Adjust the final position based on your needs */
+            }
+        }`;
+
+        // Create a style element and set its content to the dynamic keyframes
+        var styleElement = document.createElement('style');
+        styleElement.innerHTML = dynamicKeyframes;
+
+        // Append the style element to the head of the document
+        document.head.appendChild(styleElement);
+
+
+        // Apply the animation to the icon
+        if (selectedText.includes("SFH A")) {
+            icon.style.animation = 'moveDown 95s linear forwards';
+        } else if (selectedText.includes("SFH B")) {
+            icon.style.animation = 'moveDown 4s linear forwards'; // Set durations for SFH B
+        } else {
+            icon.style.animation = 'moveDown 10s linear forwards';
+        }
+
+        var videoElement = document.getElementById("selectedVideo");
+
+        var rectangleElement = document.getElementById("InitialRectangle");
+        var rectangleTop = document.getElementById("TopRectangle");
+        var rectangleInt = document.getElementById("IntRectangle");
+
+        var images = [
+        { src: "demo_selected_trace/trace2-DemoVideo/rotation.png", startTime: 14, endTime: 23 },
+        {src: "demo_selected_trace/trace2-DemoVideo/screenshot.png", startTime: 23, endTime: 60 },
+        { src: "demo_selected_trace/trace2-DemoVideo/front.png", startTime: 67, endTime: 90 }
+        // Add more images with their respective time ranges as needed
+        ];
+
+        // Listener for video time update
+        videoElement.addEventListener("timeupdate", function () {
+            // Check if the current playback time is between 5 and 10 seconds
+            if (videoElement.currentTime >= 9 && videoElement.currentTime <= 14) {
+                rectangleElement.classList.add("active");
+            } else if (videoElement.currentTime > 15 && videoElement.currentTime <= 23) {
+                rectangleElement.classList.remove("active");
+                rectangleTop.classList.add("active");
+            } else if (videoElement.currentTime > 23 && videoElement.currentTime <= 60) {
+                rectangleTop.classList.remove("active");
+                rectangleInt.classList.add("active");
+            } else if (videoElement.currentTime > 60 && videoElement.currentTime <= 67) {
+                rectangleInt.classList.remove("active");
+                FrontRectangle.classList.add("active");
+            } else {
+                FrontRectangle.classList.remove("active");
+            }
+
+            // Loop through the images array to check for time ranges
+            for (var i = 0; i < images.length; i++) {
+                var image = images[i];
+                // Check if the current time falls within the desired range for this image
+                if (videoElement.currentTime >= image.startTime && videoElement.currentTime <= image.endTime) {
+                    // Update the image source and display it
+                    overlayImage.src = image.src;
+                    document.getElementById("selectedTextDisplay").innerText = "Processed Result: ";
+                    overlayImage.style.display = "block";
+                    if (i>=1){
+                        arrowImage.style.display = "block";
+                        border.style.display = "block";
+                    }
+                    // Exit the loop to prevent changing the image multiple times
+                    return;
+                }
+            }
+            // Hide the image if the current time is not within any specified range
+            overlayImage.style.display = "none";
+        });
+        
+        document.getElementById("inputForm").addEventListener("submit", function(event) {
+            // Prevent the default form submission behavior
+            event.preventDefault();
+            
+            // Get the input value
+            var inputValue = document.getElementById("fname").value;
+
+            var xhr = new XMLHttpRequest();
+            // xhr.open("POST", "http://127.0.0.1:5000/", true);
+            xhr.open("POST", "http://10.145.21.49:5000/get_image", true); // Send a POST request to /get_image endpoint
+            xhr.responseType = "blob"; // Set the response type to blob (binary data)
+            xhr.setRequestHeader("Content-Type", "application/json");
+            var viewtype = "top";
+
+            var data = JSON.stringify({ whichView: viewtype, sfhName: "SFH A", safetyDistance: inputValue });
+
+            xhr.onload = function() {
+                if (xhr.status == 200) {
+                    // var response = JSON.parse(xhr.responseText);
+                    var blob = xhr.response; // Get the binary image data
+                    var size = blob.size;
+                    console.log("Image Width:", size);
+                    var outputDiv = document.getElementById("output");
+                    outputDiv.innerHTML = '';
+
+                    if (size < 800) {
+                        outputDiv.innerText = "The safety distance "+ inputValue+ " is too large. Cannot find a suitable drop-off point. Please try a smaller one.";
+                    }else{
+                        var imageURL = URL.createObjectURL(blob); // Create a URL for the binary data
+
+                        // Display image generated by Python script
+                        var imageOutput = document.createElement("img");
+                        imageOutput.src = imageURL;
+
+                        var imageHeight = imageOutput.height;
+
+                        imageOutput.style.width = "380px"; // Set the height
+                        imageOutput.style.position = "relative"; // Set the position
+                        imageOutput.style.left = "130px"; // Set the left position
+                        imageOutput.style.top = "-30px"; // Set the top position
+                        outputDiv.appendChild(imageOutput);
+
+                    }
+                    /*
+                    if (response.imageURL == "None") {
+                        outputDiv.innerText = "The safety distance "+ inputValue+ " is too large. Cannot find a suitable drop-off point. Please try a smaller one.";
+                    } else{
+                        imageOutput.src = response.imageURL;
+                        imageOutput.style.width = "380px"; // Set the height
+                        imageOutput.style.position = "relative"; // Set the position
+                        imageOutput.style.left = "130px"; // Set the left position
+                        imageOutput.style.top = "-30px"; // Set the top position
+                        outputDiv.appendChild(imageOutput);
+                    }
+                    */
+
+                } else {
+                    console.error("Error:", xhr.statusText);
+                }
+            };
+
+            xhr.send(data);
+        });
+
+        
+
+        // Add event listener to detect when video is paused
+        videoElement.addEventListener("pause", function() {
+            // Pause the icon animation
+            icon.style.animationPlayState = "paused";
+        });
+
+        // Add event listener to detect when video is played
+        videoElement.addEventListener("play", function() {
+            // Resume the icon animation
+            icon.style.animationPlayState = "running";
+        });
+
+    }
+
+    function getAnimationDurations(selectedText) {
+        // Add logic to determine the durations based on the selected text
+        if (selectedText.includes("SFH A")) {
+            return [9, 16]; // Set durations for SFH A
+        } else if (selectedText.includes("SFH B")) {
+            return [20, 3]; // Set durations for SFH B
+        } else {
+            return [50, 4]; // Default durations for other videos
+        }
+    }
+
+    function openPopup(rectangleId) {
+        var popupContent = document.getElementById("popup-content");
+        var content;
+
+        if (rectangleId === "InitialRectangle") {
+            content = "We need to make sure the orientation of the captured image follow desired pattern.";
+            document.getElementById("openNewPage").setAttribute("onclick", "openNewPage('InitialRectangle')");
+        } else if (rectangleId === "TopRectangle") {
+            content = "Why we need top view.";
+            document.getElementById("openNewPage").setAttribute("onclick", "openNewPage('TopRectangle')");
+        } else if (rectangleId === "FrontRectangle") {
+            content = "Why we need front view.";
+            document.getElementById("openNewPage").setAttribute("onclick", "openNewPage('FrontRectangle')");
+        } else {
+            content = "Default content for unknown rectangle.";
+        }
+
+        // Set the popup content
+        popupContent.innerHTML = content;
+
+        // Add your logic here to open the popup
+        window.location.href = "#popup-box";
+    }
+
+
+    function openNewPage(rectangleId) {
+        // Determine the URL based on the rectangle ID
+        var url;
+        if (rectangleId === "FrontRectangle") {
+            url = "frontindex.html";
+        } else if (rectangleId === "TopRectangle") {
+            url = "index.html";
+        } else {
+            url = "index.html";
+        }
+
+        // Open the new page
+        window.open(url, "_blank");
+    }
+
+
+</script>
+
+</body>
+</html>

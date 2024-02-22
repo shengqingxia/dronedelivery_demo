@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>Cyborg - Awesome HTML5 Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-cyborg-gaming.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+<!--
+
+TemplateMo 579 Cyborg Gaming
+
+https://templatemo.com/tm-579-cyborg-gaming
+
+-->
+  </head>
+
+
+<style>
+  /* Variables */
+  :root {
+    --c-primary: #586075;
+    --c-secondary: #8BE5AD;
+    --c-accent: #F5F5F0;
+    }
+
+  .mymodal {
+      position: fixed; /* Change to absolute for positioning */
+      top: 50%; /* Center vertically */
+      left: 50%; /* Center horizontally */
+      transform: translate(-50%, -50%); /* Center exactly */
+      font-size: 1.2em;
+      color: var(--c-primary);
+      width: 600px; /* Adjust width as needed */
+      height: 600px;
+      padding: 1em 2em;
+      border-radius: 15px;
+      background-color: var(--c-accent);
+      border: 5px solid var(--c-secondary);
+      box-shadow: 0 15px 20px rgba(0, 0, 0, .2);
+      display: none; /* Hide initially */
+  }
+
+  .mymodal:target {
+      display: block; /* Show when targeted */
+  }
+
+  .mycontent {
+        font-size: 1.2em;
+        color: var(--c-primary);
+  }
+
+
+  .mybox-close {
+      position: absolute;
+      top: 0;
+      right: 15px;
+      color: #1d6c3b7d;
+      text-decoration: none;
+      font-size: 30px;
+  }
+
+</style>
+
+
+<body>
+
+  <div id="popup-box" class="mymodal">
+    <div id="content" class="mycontent">
+      <!-- Contents of the div -->
+      <p>Try different safety distance (default: 1.5 m):</p>
+      <form id="inputForm">
+          <input type="number" step="0.1" id="fname" name="fname" style="height:30px;width:60px;font-size:12px;">
+          <input type="submit" value="Apply" style="font-size:12px;">
+      </form>
+      <a href="#" class="mybox-close">
+        ×
+      </a>
+    </div>
+    <div id="showresult">
+    </div>
+  </div>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="assets/images/logo.png" alt="">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Search End ***** -->
+
+                    <!-- ***** Search End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a href="mainpage.html">Home</a></li>
+                        <li><a href="index.html">Top-View</a></li>
+                        <li><a href="frontindex.html" class="active">Front-View</a></li>
+                        <li><a href="index.html">Initialization</a></li>
+                        <li><a href="https://www.cs.purdue.edu/homes/chunyi/index.html">MSSN Group <img src="assets/images/mavic_icon.avif" alt=""></a></li>
+                    </ul>   
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-content">
+
+          <!-- ***** Banner Start ***** -->
+          <div class="main-banner1">
+            <div class="row">
+              <div class="col-lg-7">
+                <div class="header-text">
+                  <h6>Welcome To SSS</h6>
+                  <h4><em>Try</em> Our Front-View Module Here</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ***** Banner End ***** -->
+
+          <!-- ***** Most Popular Start ***** -->
+          <div class="most-popular">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="heading-section">
+                  <h4><em>More Samples</em> Right Now</h4>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3 col-sm-6">
+                    <div class="item">
+                      <img id="Image1" src="demo_selected_SFHs/front/3017_1687377198676_22_2.0_-86.91444658527286_40.46153577451032_-26.7_-0.5_0.0_DONE0.png" alt="" onclick="openPopup('Image1')">
+                      <span>SFH 1</span></h4>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                    <div class="item">
+                      <img id="Image2" src="demo_selected_SFHs/front/3020ideal_1686431581456_366_1.600000023841858_-86.9141265141953_40.461652968579735_-18.0_161.0_0.0_DONE0.png" alt="" onclick="openPopup('Image2')">
+                      <span>SFH 2</span></h4>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                    <div class="item">
+                      <img id="Image3" src="demo_selected_SFHs/front/3308covint_1687377198676_22_2.0_-86.91469104210569_40.46577253554655_-33.3_-1.3_0.0_DONE0.png" alt="" onclick="openPopup('Image3')">
+                      <span>SFH 3</span></h4>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                    <div class="item">
+                      <img id="Image4" src="demo_selected_SFHs/front/3315inter_1687294894469_7_1.7000000476837158_-86.91044216778005_40.46463228361912_-50.7_163.4_0.0_DONE0.png" alt="" onclick="openPopup('Image4')">
+                      <span>SFH 4</span></h4>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                    <div class="item">
+                      <img src="demo_selected_SFHs/front/3334putint_1687381761494_47_1.7999999523162842_-86.91044422234981_40.4651801102906_-25.3_132.0_0.0_DONE0.png" alt="">
+                      <span>SFH 5</span></h4>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                    <div class="item">
+                      <img src="demo_selected_SFHs/front/3412dobint_1687378647914_5_2.0_-86.91284094924568_40.46721935657994_-28.9_160.6_0.0_DONE0.png" alt="">
+                      <span>SFH 6</span></h4>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                    <div class="item">
+                      <img src="demo_selected_SFHs/front/3427puinter_1687291264563_54_1.7999999523162842_-86.91061592752192_40.46777881760107_-23.4_-168.9_0.0_DONE0.png" alt="">
+                      <span>SFH 7</span></h4>
+                    </div>
+                  </div>
+                  
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ***** Most Popular End ***** -->
+          <!-- ***** Gaming Library End ***** -->
+        </div>
+      </div>
+    </div>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Copyright © 2036 <a href="#">Cyborg Gaming</a> Company. All rights reserved. 
+          
+          <br>Design: <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script>
+
+var imagePth;
+
+    function openPopup(imageId) {
+      var imageElement = document.getElementById(imageId);
+      imagePth = imageElement.src;
+      console.log("Image URL:", imagePth);
+      // Add your logic here to open the popup
+      window.location.href = "#popup-box";
+      var outputDiv = document.getElementById("showresult");
+      outputDiv.innerHTML = '';
+    }
+
+    document.getElementById("inputForm").addEventListener("submit", function(event) {
+            // Prevent the default form submission behavior
+            event.preventDefault();
+            
+            // Get the input value
+            var inputValue = document.getElementById("fname").value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://127.0.0.1:5000/", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            var viewtype = "front";
+
+            var data = JSON.stringify({ whichView: viewtype, sfhName: imagePth, safetyDistance: inputValue });
+
+            xhr.onload = function() {
+                if (xhr.status == 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    var outputDiv = document.getElementById("showresult");
+
+                    outputDiv.innerHTML = '';
+
+                    // Display image generated by Python script
+                    var imageOutput = document.createElement("img");
+                    if (response.imageURL == "None") {
+                        outputDiv.innerText = "The safety distance "+ inputValue+ " is too large. Cannot find a suitable drop-off point. Please try a smaller one.";
+                    } else{
+                        imageOutput.src = response.imageURL;
+                        imageOutput.style.position = "relative"; // Set the position
+                        imageOutput.style.left = "10px"; // Set the left position
+                        imageOutput.style.top = "20px"; // Set the top position
+                        outputDiv.appendChild(imageOutput);
+                    }
+
+                } else {
+                    console.error("Error:", xhr.statusText);
+                }
+            };
+
+            xhr.send(data);
+        });
+  </script>
+
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/tabs.js"></script>
+  <script src="assets/js/popup.js"></script>
+  <script src="assets/js/custom.js"></script>
+
+
+  </body>
+
+</html>
